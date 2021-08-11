@@ -17,7 +17,8 @@ const MainNavigator = () => {
             <Navigator.Navigator
                 initialRouteName='Login'
                 screenOptions={{
-                    headerTintColor: Colors.PRIMARY
+                    headerTintColor: Colors.PRIMARY,
+                    title: 'NetoCommerce'
                 }}>
                 <Navigator.Screen name='Login' component={LoginScreen} />
                 <Navigator.Screen name='Register' component={RegisterScreen} />
