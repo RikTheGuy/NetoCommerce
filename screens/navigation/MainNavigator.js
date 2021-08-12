@@ -16,15 +16,15 @@ const MainNavigator = () => {
     return (
         <NavigationContainer>
             <Navigator.Navigator
-                initialRouteName='Login'
+                initialRouteName='Tabs'
                 screenOptions={{
                     headerTintColor: Colors.PRIMARY,
                     title: 'NetoCommerce'
                 }}>
-                <Navigator.Screen name='Login' component={LoginScreen} />
-                <Navigator.Screen name='Register' component={RegisterScreen} />
                 <Navigator.Screen name='Tabs' component={BottomNavigator} />
                 <Navigator.Screen name='Detail' component={DetailScreen} />
+                <Navigator.Screen name='Login' component={LoginScreen} />
+                <Navigator.Screen name='Register' component={RegisterScreen} />
             </Navigator.Navigator>
             <StatusBar />
         </NavigationContainer>

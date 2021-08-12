@@ -7,10 +7,16 @@ import Sizes from '../constants/Sizes.js'
 
 import { scaleX, scaleY } from '../utils/Scale.js'
 
-export const InputField = ({ placeholder = '', value = '', onChangeText, editable = true }) => {
+export const InputField = ({ placeholder = '', value = '', onChangeText, editable = true, style = {}, keyboardType = 'default' }) => {
     return (
         <TextInput
-            style={styles.input}
+            style={{
+                ...styles.input,
+                color: editable ? Colors.NORMAL : Colors.HINT,
+                backgroundColor: editable ? Colors.SECONDARY : Colors.BACKGROUND,
+                ...style
+            }}
+            keyboardType={keyboardType}
             placeholderTextColor={Colors.HINT}
             placeholder={placeholder}
             value={value}
@@ -45,7 +51,6 @@ const styles = StyleSheet.create({
         borderColor: Colors.PRIMARY,
         borderRadius: scaleX(Sizes.SMALL),
         padding: scaleX(Sizes.SMALL),
-        color: Colors.NORMAL
     },
     label: {
         color: Colors.PRIMARY,

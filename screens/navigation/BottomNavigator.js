@@ -15,10 +15,10 @@ const BottomNavigator = () => {
         <Tabs.Navigator
             screenOptions={{
                 headerShown: false,
-                tabBarActiveTintColor: Colors.SECONDARY,
-                tabBarInactiveTintColor: Colors.PRIMARY,
+                tabBarActiveTintColor: Colors.PRIMARY,
+                tabBarInactiveTintColor: Colors.HINT,
                 tabBarShowLabel: true,
-                tabBarActiveBackgroundColor: Colors.PRIMARY,
+                tabBarActiveBackgroundColor: Colors.SECONDARY,
                 tabBarInactiveBackgroundColor: Colors.SECONDARY,
             }}>
             <Tabs.Screen name='Products' options={{ tabBarIcon: ({ color, size }) => <Ionicons name='md-basket' color={color} size={size} /> }} component={ProductScreen} />

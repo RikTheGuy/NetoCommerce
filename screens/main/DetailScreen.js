@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, ScrollView, Text, ActivityIndicator, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux';
 
 import Message from '../../components/Message.js';
+import Button from '../../components/Button.js';
+import { InputField } from '../../components/Form.js';
 
 import { getProduct } from '../../store/actions/ProductActions.js'
+import { addItem } from '../../store/actions/CartActions.js'
 import { scaleX, scaleY } from '../../utils/Scale.js';
 import image from '../../images/product_image.jpg'
 
@@ -17,11 +20,26 @@ const DetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch()
     const productDetailReducer = useSelector(state => state.productDetail)
 
+    const [quantity, setQuantity] = useState(1)
     const { id } = route.params
 
     useEffect(() => {
         dispatch(getProduct(id))
     }, [id])
+
+    const submit = () => {
+        if (quantity == '' || isNaN(quantity) || parseInt(quantity) <= 0)
+            return
+        const data = {
+            _id: productDetailReducer.product._id,
+            image: productDetailReducer.product.image,
+            title: productDetailReducer.product.title,
+            price: productDetailReducer.product.price,
+        }
+
+        dispatch(addItem(data, quantity))
+        navigation.navigate('Cart')
+    }
 
     return (
         <View style={styles.screen}>
@@ -83,6 +101,10 @@ const DetailScreen = ({ navigation, route }) => {
                             </View>
                         </View>}
             </ScrollView>
+            <View style={styles.footer}>
+                <InputField style={{ flex: 1, borderRightWidth: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0 }} placeholder='Quantity' keyboardType='decimal-pad' value={quantity.toString()} onChangeText={e => setQuantity(e)} />
+                <Button style={{ flex: 1, borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }} title='Add To Cart' onPress={submit} centered />
+            </View>
         </View>
     )
 }
@@ -140,7 +162,8 @@ const styles = StyleSheet.create({
     },
     table: {
         backgroundColor: Colors.PRIMARY,
-        marginVertical: scaleY(Sizes.SMALL),
+        marginTop: scaleY(Sizes.SMALL),
+        marginBottom: scaleY(Sizes.LARGE * 3),
         borderWidth: scaleX(1),
         borderColor: Colors.PRIMARY
     },
@@ -155,5 +178,17 @@ const styles = StyleSheet.create({
         fontSize: scaleY(Fonts.SMALL),
         color: Colors.NORMAL,
         backgroundColor: Colors.BACKGROUND
+    },
+    footer: {
+        flex: 1,
+        flexDirection: 'row',
+        position: 'absolute',
+        elevation: 5,
+        bottom: 0,
+        backgroundColor: Colors.SECONDARY,
+        paddingVertical: scaleY(Sizes.SMALL),
+        paddingHorizontal: scaleX(Sizes.LARGE),
+        borderTopLeftRadius: scaleX(Sizes.MEDIUM),
+        borderTopRightRadius: scaleX(Sizes.MEDIUM),
     }
 })

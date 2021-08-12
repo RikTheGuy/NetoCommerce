@@ -5,12 +5,15 @@ import Sizes from '../constants/Sizes.js'
 import Fonts from '../constants/Fonts.js'
 import { scaleX, scaleY } from '../utils/Scale'
 
-const Button = ({ title, onPress, fontSize = scaleY(Fonts.MEDIUM) }) => {
+const Button = ({ title = '', onPress, fontSize = scaleY(Fonts.MEDIUM), style = {}, centered = false, children = null }) => {
     return (
-        <View style={styles.screen}>
+        <View style={{ ...styles.screen, ...style }}>
             <TouchableNativeFeedback onPress={onPress}>
                 <View style={styles.main}>
-                    <Text style={{ ...styles.text, fontSize }}>{title}</Text>
+                    {
+                        children != null ? children :
+                            <Text style={{ ...styles.text, fontSize, textAlign: centered ? 'center' : 'auto' }}>{title}</Text>
+                    }
                 </View>
             </TouchableNativeFeedback>
         </View>
