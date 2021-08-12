@@ -4,10 +4,10 @@ import { combineReducers, applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
-import { ProductListReducer } from './store/reducers/ProductReducer.js'
+import { ProductListReducer, ProductDetailReducer } from './store/reducers/ProductReducer.js'
 
 const reducer = combineReducers({
-  productList: ProductListReducer
+  productList: ProductListReducer, productDetail: ProductDetailReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

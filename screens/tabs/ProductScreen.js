@@ -12,7 +12,7 @@ import Colors from '../../constants/Colors.js'
 import { PRODUCT_LIST_RESET } from '../../store/constants/ProductConstants.js'
 import Fonts from '../../constants/Fonts.js'
 
-const ProductScreen = () => {
+const ProductScreen = ({ navigation }) => {
     const dispatch = useDispatch()
     const productListReducer = useSelector(state => state.productList)
     const [page, setPage] = useState(0)
@@ -47,7 +47,7 @@ const ProductScreen = () => {
                 <FlatList
                     data={productListReducer.products}
                     keyExtractor={item => item._id}
-                    renderItem={item => <Product product={item.item} onPress={() => console.log('Pressed')} />}
+                    renderItem={item => <Product product={item.item} onPress={() => navigation.push('Detail', { id: item.item._id })} />}
                     horizontal={false}
                     numColumns={2}
                     onEndReachedThreshold={0.5}
@@ -66,7 +66,7 @@ const ProductScreen = () => {
                 productListReducer.error != null &&
                 <Message message={productListReducer.error} style={{ textAlign: 'center' }} danger />
             }
-            <FAB fontSize={Fonts.LARGE} iconName='md-filter' onPress={() => console.log('Filter')}/>
+            <FAB fontSize={Fonts.LARGE} iconName='md-filter' onPress={() => console.log('Filter')} />
         </View>
     )
 }

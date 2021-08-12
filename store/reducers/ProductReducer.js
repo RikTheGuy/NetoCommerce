@@ -3,6 +3,10 @@ import {
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAILURE,
     PRODUCT_LIST_RESET,
+
+    PRODUCT_DETAIL_REQUEST,
+    PRODUCT_DETAIL_FAILURE,
+    PRODUCT_DETAIL_SUCCESS,
 } from '../constants/ProductConstants.js'
 
 export const ProductListReducer = (state = { products: [] }, action) => {
@@ -29,6 +33,32 @@ export const ProductListReducer = (state = { products: [] }, action) => {
         case PRODUCT_LIST_RESET: {
             return {
                 products: []
+            }
+        }
+        default: {
+            return state
+        }
+    }
+}
+
+export const ProductDetailReducer = (state = { product: { nutrients: {} } }, action) => {
+    switch (action.type) {
+        case PRODUCT_DETAIL_REQUEST: {
+            return {
+                loading: true,
+                product: { nutrients: {} }
+            }
+        }
+        case PRODUCT_DETAIL_SUCCESS: {
+            return {
+                loading: false,
+                product: action.payload
+            }
+        }
+        case PRODUCT_DETAIL_FAILURE: {
+            return {
+                loading: false,
+                error: action.payload
             }
         }
         default: {
