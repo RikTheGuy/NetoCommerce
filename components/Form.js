@@ -7,7 +7,7 @@ import Sizes from '../constants/Sizes.js'
 
 import { scaleX, scaleY } from '../utils/Scale.js'
 
-export const InputField = ({ placeholder = '', value = '', onChangeText, editable = true, style = {}, keyboardType = 'default' }) => {
+export const InputField = ({ placeholder = '', value = '', onChangeText, editable = true, style = {}, keyboardType = 'default', secureTextEntry = false }) => {
     return (
         <TextInput
             style={{
@@ -22,6 +22,7 @@ export const InputField = ({ placeholder = '', value = '', onChangeText, editabl
             value={value}
             onChangeText={e => onChangeText(e)}
             editable={editable}
+            secureTextEntry={secureTextEntry}
         />
     )
 }
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     },
     label: {
         color: Colors.PRIMARY,
-        fontSize: scaleY(Fonts.NORMAL),
+        fontSize: scaleY(Fonts.MEDIUM),
     },
     title: {
         fontSize: scaleY(Fonts.LARGE),

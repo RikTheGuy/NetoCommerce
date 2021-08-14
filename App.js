@@ -6,10 +6,12 @@ import thunk from 'redux-thunk'
 
 import { ProductListReducer, ProductDetailReducer } from './store/reducers/ProductReducer.js'
 import { CartReducer } from './store/reducers/CartReducer.js'
+import { LoginReducer, RegisterReducer } from './store/reducers/AuthReducer.js'
 
 const reducer = combineReducers({
   productList: ProductListReducer, productDetail: ProductDetailReducer,
-  cart: CartReducer
+  cart: CartReducer,
+  authLogin: LoginReducer, authRegister: RegisterReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))
