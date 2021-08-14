@@ -7,6 +7,7 @@ import {
     AUTH_REGISTER_REQUEST,
     AUTH_REGISTER_SUCCESS,
     AUTH_REGISTER_FAILURE,
+    AUTH_LOGOUT_SUCCESS,
 } from '../constants/AuthConstants.js'
 
 export const login = (email, password) => async (dispatch) => {
@@ -66,4 +67,8 @@ export const register = (credentials) => async (dispatch) => {
                 error.message
         })
     }
+}
+
+export const logout = () => async (dispatch) => {
+    dispatch({ type: AUTH_LOGOUT_SUCCESS })
 }

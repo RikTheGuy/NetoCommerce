@@ -14,7 +14,7 @@ import Sizes from '../../constants/Sizes.js'
 
 import { Ionicons } from '@expo/vector-icons'
 
-const CartScreen = ({ navigation }) => {
+const CartScreen = () => {
 
     const CartReducer = useSelector(state => state.cart)
 

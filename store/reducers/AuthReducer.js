@@ -9,6 +9,8 @@ import {
     AUTH_REGISTER_FAILURE,
     AUTH_REGISTER_RESET,
 
+    AUTH_LOGOUT_SUCCESS,
+
 } from '../constants/AuthConstants.js'
 
 export const LoginReducer = (state = {}, action) => {
@@ -34,6 +36,9 @@ export const LoginReducer = (state = {}, action) => {
             return {
                 loading: false
             }
+        }
+        case AUTH_LOGOUT_SUCCESS: {
+            return {}
         }
         default: {
             return state

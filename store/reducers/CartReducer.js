@@ -15,13 +15,14 @@ export const CartReducer = (state = { items: [] }, action) => {
             }
 
             return {
+                ...state,
                 items: items
             }
         }
         case CART_EDIT_ITEM: {
             let items = state.items
             const id = items.findIndex(x => x._id === action.payload._id)
-            
+
             if (action.payload.quantity <= 0) {
                 items.splice(id, 1)
             } else {
@@ -29,6 +30,7 @@ export const CartReducer = (state = { items: [] }, action) => {
             }
 
             return {
+                ...state,
                 items: items
             }
         }

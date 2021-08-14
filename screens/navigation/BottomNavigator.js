@@ -21,8 +21,9 @@ const BottomNavigator = () => {
                 tabBarShowLabel: true,
                 tabBarActiveBackgroundColor: Colors.SECONDARY,
                 tabBarInactiveBackgroundColor: Colors.SECONDARY,
+                unmountOnBlur: true
             }}>
-            <Tabs.Screen name='Products' options={{ tabBarIcon: ({ color, size }) => <Ionicons name='md-basket' color={color} size={size} />, unmountOnBlur: true }} component={ProductScreen} />
+            <Tabs.Screen name='Products' options={{ tabBarIcon: ({ color, size }) => <Ionicons name='md-basket' color={color} size={size} /> }} component={ProductScreen} />
             <Tabs.Screen name='Cart' options={{ tabBarIcon: ({ color, size }) => <Ionicons name='md-cart' color={color} size={size} /> }} component={CartScreen} />
             <Tabs.Screen name='Auth' options={{ tabBarIcon: ({ color, size }) => <Ionicons name='md-person' color={color} size={size} /> }} component={AuthNavigator} />
         </Tabs.Navigator>
