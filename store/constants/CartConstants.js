@@ -1,2 +1,5 @@
 export const CART_ADD_ITEM = 'CART_ADD_ITEM'
 export const CART_EDIT_ITEM = 'CART_EDIT_ITEM'
+
+export const CART_SET_ADDRESS = 'CART_SET_ADDRESS'
+export const CART_RESET_ADDRESS = 'CART_RESET_ADDRESS'

@@ -1,6 +1,9 @@
 import {
     CART_ADD_ITEM,
     CART_EDIT_ITEM,
+
+    CART_SET_ADDRESS,
+    CART_RESET_ADDRESS,
 } from '../constants/CartConstants.js'
 
 export const CartReducer = (state = { items: [] }, action) => {
@@ -33,6 +36,25 @@ export const CartReducer = (state = { items: [] }, action) => {
                 ...state,
                 items: items
             }
+        }
+        default: {
+            return state
+        }
+    }
+}
+
+export const CartAddressReducer = (state = {}, action) => {
+    switch (action.type) {
+        case CART_SET_ADDRESS: {
+            return {
+                ...state,
+                address: action.payload.address,
+                city: action.payload.city,
+                postalCode: action.payload.postalCode,
+            }
+        }
+        case CART_RESET_ADDRESS: {
+            return {}
         }
         default: {
             return state

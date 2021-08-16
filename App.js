@@ -7,12 +7,11 @@ import thunk from 'redux-thunk'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { ProductListReducer, ProductDetailReducer } from './store/reducers/ProductReducer.js'
-import { CartReducer } from './store/reducers/CartReducer.js'
+import { OrderListReducer, OrderDetailReducer, OrderCreateReducer } from './store/reducers/OrderReducer.js'
+import { CartReducer, CartAddressReducer } from './store/reducers/CartReducer.js'
 import { LoginReducer, RegisterReducer } from './store/reducers/AuthReducer.js'
 
 import MainNavigator from './screens/navigation/MainNavigator.js'
-
-import { Text } from 'react-native'
 
 const authConfig = {
   key: 'auth',
@@ -22,7 +21,8 @@ const authConfig = {
 
 const reducer = combineReducers({
   productList: ProductListReducer, productDetail: ProductDetailReducer,
-  cart: CartReducer,
+  orderList: OrderListReducer, orderDetail: OrderDetailReducer, orderCreate: OrderCreateReducer,
+  cart: CartReducer, cartAddress: CartAddressReducer,
   authLogin: persistReducer(authConfig, LoginReducer), authRegister: RegisterReducer
 })
 

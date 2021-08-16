@@ -14,12 +14,13 @@ import Sizes from '../../constants/Sizes.js'
 
 import { Ionicons } from '@expo/vector-icons'
 
-const CartScreen = () => {
+const CartScreen = ({ navigation }) => {
 
     const CartReducer = useSelector(state => state.cart)
 
     const submit = () => {
-        console.log('submit')
+        CartReducer.items && CartReducer.items.length > 0 &&
+            navigation.push('Checkout')
     }
 
     return (

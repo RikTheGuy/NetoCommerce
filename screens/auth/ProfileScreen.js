@@ -18,6 +18,7 @@ const ProfileScreen = ({ navigation }) => {
         <View>
             <Text>ProfileScreen</Text>
             <Text onPress={() => dispatch({ type: AUTH_LOGOUT_SUCCESS })}>Logout</Text>
+            <Text onPress={() => navigation.push('Orders')}>My Orders</Text>
         </View>
     )
 }

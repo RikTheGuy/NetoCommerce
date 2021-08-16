@@ -8,12 +8,13 @@ import {
     PRODUCT_DETAIL_REQUEST,
     PRODUCT_DETAIL_SUCCESS,
     PRODUCT_DETAIL_FAILURE,
+    PRODUCT_PAGE_LENGTH,
 } from '../constants/ProductConstants.js'
 
 export const listProducts = (page = 0) => async (dispatch) => {
     try {
 
-        const limit = 8
+        const limit = PRODUCT_PAGE_LENGTH
 
         dispatch({ type: PRODUCT_LIST_REQUEST })
         const { data } = await axios({
