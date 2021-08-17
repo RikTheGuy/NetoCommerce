@@ -18,6 +18,7 @@ const ShippingScreen = ({ navigation }) => {
 
     const dispatch = useDispatch()
     const ShippingReducer = useSelector(state => state.cartAddress)
+    const LoginReducer = useSelector(state => state.authLogin)
 
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -41,6 +42,12 @@ const ShippingScreen = ({ navigation }) => {
         setCity(ShippingReducer.city ? ShippingReducer.city : '')
         setPostalCode(ShippingReducer.postalCode ? ShippingReducer.postalCode : '')
     }, [])
+
+    useEffect(() => {
+        if (!LoginReducer.data || (LoginReducer.data && !LoginReducer.data._id)) {
+            navigation.popToTop()
+        }
+    }, [navigation, LoginReducer])
 
     return (
         <View style={styles.screen}>

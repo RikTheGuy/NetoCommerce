@@ -72,3 +72,19 @@ export const register = (credentials) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     dispatch({ type: AUTH_LOGOUT_SUCCESS })
 }
+
+export const updateTokens = (data) => async (dispatch) => {
+    try {
+        dispatch({
+            type: AUTH_LOGIN_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: AUTH_LOGIN_FAILURE,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message :
+                error.message
+        })
+    }
+}

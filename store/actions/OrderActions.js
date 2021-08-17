@@ -8,7 +8,7 @@ import {
     ORDER_DETAIL_REQUEST,
     ORDER_DETAIL_SUCCESS,
     ORDER_DETAIL_FAILURE,
-    
+
     ORDER_PAGE_LENGTH,
 
     ORDER_CREATE_REQUEST,
@@ -16,7 +16,7 @@ import {
     ORDER_CREATE_FAILURE,
 } from '../constants/OrderConstants.js'
 
-import { logout } from './AuthActions.js'
+import { logout, updateTokens } from './AuthActions.js'
 
 export const listOrders = (page = 0) => async (dispatch, getState) => {
     try {
@@ -36,9 +36,12 @@ export const listOrders = (page = 0) => async (dispatch, getState) => {
 
         dispatch({
             type: ORDER_LIST_SUCCESS,
-            payload: data
+            payload: data.orders
         })
-
+        dispatch(updateTokens({
+            _id: authLogin.data._id,
+            tokens: data.tokens
+        }))
     } catch (error) {
         if (error.response && error.response.status === 401)
             dispatch(logout())
@@ -67,8 +70,12 @@ export const getOrder = (id) => async (dispatch, getState) => {
 
         dispatch({
             type: ORDER_DETAIL_SUCCESS,
-            payload: data
+            payload: data.order
         })
+        dispatch(updateTokens({
+            _id: authLogin.data._id,
+            tokens: data.tokens
+        }))
 
     } catch (error) {
         if (error.response && error.response.status === 401)
@@ -100,8 +107,12 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
         dispatch({
             type: ORDER_CREATE_SUCCESS,
-            payload: data._id
+            payload: data.order._id
         })
+        dispatch(updateTokens({
+            _id: authLogin.data._id,
+            tokens: data.tokens
+        }))
 
     } catch (error) {
         if (error.response && error.response.status === 401)

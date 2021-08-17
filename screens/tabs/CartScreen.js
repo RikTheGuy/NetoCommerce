@@ -20,7 +20,7 @@ const CartScreen = ({ navigation }) => {
 
     const submit = () => {
         CartReducer.items && CartReducer.items.length > 0 &&
-            navigation.push('Checkout')
+            navigation.navigate('Auth', { redirect: 'Checkout' })
     }
 
     return (

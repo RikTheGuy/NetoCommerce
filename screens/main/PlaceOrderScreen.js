@@ -14,6 +14,7 @@ const PlaceOrderScreen = ({ navigation }) => {
     const OrderCreateReducer = useSelector(state => state.orderCreate)
     const CartReducer = useSelector(state => state.cart)
     const CartAddressReducer = useSelector(state => state.cartAddress)
+    const LoginReducer = useSelector(state => state.authLogin)
 
     const submit = () => {
         const order = {
@@ -32,6 +33,12 @@ const PlaceOrderScreen = ({ navigation }) => {
             navigation.replace('OrderDetail', { id: id })
         }
     }, [OrderCreateReducer])
+
+    useEffect(() => {
+        if (!LoginReducer.data || (LoginReducer.data && !LoginReducer.data._id)) {
+            navigation.popToTop()
+        }
+    }, [navigation, LoginReducer])
 
     return (
         <View>

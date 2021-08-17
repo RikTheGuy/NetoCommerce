@@ -55,7 +55,7 @@ const LoginScreen = ({ navigation }) => {
                     </Group>
                     <Group>
                         <Label>Email:</Label>
-                        <InputField placeholder='Ex: johnsmith@email.com' value={email} onChangeText={setEmail} editable={!LoginReducer.loading} keyboardType='email-address'/>
+                        <InputField placeholder='Ex: johnsmith@email.com' value={email} onChangeText={setEmail} editable={!LoginReducer.loading} keyboardType='email-address' />
                     </Group>
                     <Group>
                         <Label>Password:</Label>

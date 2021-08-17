@@ -15,6 +15,7 @@ import { ORDER_LIST_RESET, ORDER_PAGE_LENGTH } from '../../store/constants/Order
 const OrderScreen = ({ navigation }) => {
     const dispatch = useDispatch()
     const orderListReducer = useSelector(state => state.orderList)
+    const LoginReducer = useSelector(state => state.authLogin)
     const [page, setPage] = useState(0)
     const [refreshing, setRefreshing] = useState(false)
 
@@ -40,6 +41,12 @@ const OrderScreen = ({ navigation }) => {
         if (!orderListReducer.loading)
             setRefreshing(false)
     }, [orderListReducer])
+
+    useEffect(() => {
+        if (!LoginReducer.data || (LoginReducer.data && !LoginReducer.data._id)) {
+            navigation.popToTop()
+        }
+    }, [navigation, LoginReducer])
 
     return (
         <View style={styles.screen}>

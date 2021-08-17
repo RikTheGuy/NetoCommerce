@@ -7,7 +7,13 @@ import ProfileScreen from '../auth/ProfileScreen.js'
 
 const Navigator = createNativeStackNavigator()
 
-const AuthNavigator = () => {
+const AuthNavigator = ({ navigation, route }) => {
+
+    React.useEffect(() => {
+        if (route.params && route.params.redirect) {
+            navigation.navigate(route.params.redirect)
+        }
+    }, [route.params])
     return (
         <Navigator.Navigator
             initialRouteName='Login'
