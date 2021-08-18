@@ -13,17 +13,13 @@ import { scaleX, scaleY } from '../utils/Scale.js'
 
 const Product = ({ product, onPress }) => {
 
-    const [fav, setFav] = useState(false)
-
     return (
         <View style={styles.screen}>
             <View style={styles.main}>
-                <View style={styles.favContainer}>
-                    <TouchableNativeFeedback onPress={() => setFav(!fav)}>
-                        <View style={styles.fav}>
-                            <Ionicons name={fav ? 'md-heart' : 'md-heart-outline'} size={Fonts.XLARGE} color={Colors.PRIMARY} />
-                        </View>
-                    </TouchableNativeFeedback>
+                <View style={styles.vegContainer}>
+                    <View style={styles.veg}>
+                        <Ionicons name='md-ellipse' size={Fonts.LARGE} color={product.veg ? Colors.PRIMARY : Colors.DANGER} />
+                    </View>
                 </View>
                 <TouchableNativeFeedback onPress={onPress}>
                     <View style={styles.container}>
@@ -79,7 +75,7 @@ const styles = StyleSheet.create({
     price: {
         fontSize: scaleY(Fonts.SMALL)
     },
-    favContainer: {
+    vegContainer: {
         zIndex: 1,
         borderBottomLeftRadius: Sizes.SMALL,
         position: 'absolute',
@@ -88,7 +84,7 @@ const styles = StyleSheet.create({
         elevation: 2,
         overflow: 'hidden'
     },
-    fav: {
+    veg: {
         paddingHorizontal: scaleX(3),
         paddingVertical: scaleY(3),
         backgroundColor: Colors.SECONDARY

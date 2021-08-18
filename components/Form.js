@@ -27,6 +27,24 @@ export const InputField = ({ placeholder = '', value = '', onChangeText, editabl
     )
 }
 
+export const RadioButton = ({ selected, title }) => {
+    return (
+        <View style={styles.radioContainer}>
+            <View style={styles.radio}>
+                {
+                    selected ?
+                        <View
+                            style={styles.radioSelection}
+                        /> :
+                        null
+                }
+            </View>
+            <Text style={{ ...styles.label, marginLeft: scaleX(Sizes.SMALL) }}>{title}</Text>
+        </View>
+    )
+}
+
+
 export const Label = ({ children }) => {
     return (
         <Text style={styles.label}>{children}</Text>
@@ -52,6 +70,24 @@ const styles = StyleSheet.create({
         borderColor: Colors.PRIMARY,
         borderRadius: scaleX(Sizes.SMALL),
         padding: scaleX(Sizes.SMALL),
+    },
+    radio: {
+        height: scaleY(Fonts.MEDIUM),
+        width: scaleX(Fonts.MEDIUM),
+        borderRadius: Fonts.MEDIUM,
+        borderWidth: 2,
+        borderColor: Colors.NORMAL,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    radioContainer: {
+        flexDirection: 'row'
+    },
+    radioSelection: {
+        height: scaleY(Fonts.MEDIUM - 10),
+        width: scaleX(Fonts.MEDIUM - 10),
+        borderRadius: 6,
+        backgroundColor: Colors.PRIMARY,
     },
     label: {
         color: Colors.PRIMARY,

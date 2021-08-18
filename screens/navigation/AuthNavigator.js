@@ -7,7 +7,7 @@ import ProfileScreen from '../auth/ProfileScreen.js'
 
 const Navigator = createNativeStackNavigator()
 
-const AuthNavigator = ({ navigation, route }) => {
+const AuthNavigator = ({ navigation, route = null }) => {
 
     React.useEffect(() => {
         if (route.params && route.params.redirect) {

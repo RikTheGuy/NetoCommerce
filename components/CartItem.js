@@ -11,9 +11,8 @@ import { Ionicons } from '@expo/vector-icons'
 import image from '../images/product_image.jpg'
 
 import { editItem } from '../store/actions/CartActions.js'
-import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1'
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, review = false }) => {
 
     const [qty, setQty] = React.useState(parseInt(item.quantity))
     const dispatch = useDispatch()
@@ -28,26 +27,33 @@ const CartItem = ({ item }) => {
             <Image source={image} style={styles.img} />
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.price}>{item.price} X</Text>
-            <Picker style={styles.qty} selectedValue={qty}
-                onValueChange={(itemValue, itemIndex) => changeQty(itemValue)}>
-                <Picker.Item label='1' value={1} />
-                <Picker.Item label='2' value={2} />
-                <Picker.Item label='3' value={3} />
-                <Picker.Item label='4' value={4} />
-                <Picker.Item label='5' value={5} />
-                <Picker.Item label='6' value={6} />
-                <Picker.Item label='7' value={7} />
-                <Picker.Item label='8' value={8} />
-                <Picker.Item label='9' value={9} />
-                <Picker.Item label='10' value={10} />
-            </Picker>
-            <View style={styles.removeContainer}>
-                <TouchableNativeFeedback onPress={() => dispatch(editItem(item, 0))}>
-                    <View style={{ flex: 1 }}>
-                        <Ionicons style={styles.removeButton} name='md-trash' color={Colors.DANGER} size={scaleY(Fonts.LARGE)} />
-                    </View>
-                </TouchableNativeFeedback>
-            </View>
+            {
+                review ?
+                    <Text style={{ ...styles.qty, flex: 1 }}>{qty}</Text> :
+                    <Picker style={styles.qty} selectedValue={qty}
+                        onValueChange={(itemValue, itemIndex) => changeQty(itemValue)}>
+                        <Picker.Item label='1' value={1} />
+                        <Picker.Item label='2' value={2} />
+                        <Picker.Item label='3' value={3} />
+                        <Picker.Item label='4' value={4} />
+                        <Picker.Item label='5' value={5} />
+                        <Picker.Item label='6' value={6} />
+                        <Picker.Item label='7' value={7} />
+                        <Picker.Item label='8' value={8} />
+                        <Picker.Item label='9' value={9} />
+                        <Picker.Item label='10' value={10} />
+                    </Picker>
+            }
+            {
+                !review &&
+                <View style={styles.removeContainer}>
+                    <TouchableNativeFeedback onPress={() => dispatch(editItem(item, 0))}>
+                        <View style={{ flex: 1 }}>
+                            <Ionicons style={styles.removeButton} name='md-trash' color={Colors.DANGER} size={scaleY(Fonts.LARGE)} />
+                        </View>
+                    </TouchableNativeFeedback>
+                </View>
+            }
         </View>
     )
 }

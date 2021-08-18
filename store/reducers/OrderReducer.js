@@ -2,16 +2,16 @@ import {
     ORDER_LIST_REQUEST,
     ORDER_LIST_SUCCESS,
     ORDER_LIST_FAILURE,
-    
+
     ORDER_DETAIL_REQUEST,
     ORDER_DETAIL_SUCCESS,
     ORDER_DETAIL_FAILURE,
-    
+
     ORDER_CREATE_REQUEST,
     ORDER_CREATE_FAILURE,
     ORDER_CREATE_RESET,
     ORDER_CREATE_SUCCESS,
-    
+
     ORDER_LIST_RESET,
 } from '../constants/OrderConstants.js'
 
@@ -47,12 +47,12 @@ export const OrderListReducer = (state = { orders: [] }, action) => {
     }
 }
 
-export const OrderDetailReducer = (state = { order: { items: [] } }, action) => {
+export const OrderDetailReducer = (state = { order: { items: [], shippingAddress: {} } }, action) => {
     switch (action.type) {
         case ORDER_DETAIL_REQUEST: {
             return {
                 loading: true,
-                order: { items: [] }
+                order: { items: [], shippingAddress: {} }
             }
         }
         case ORDER_DETAIL_SUCCESS: {
@@ -63,6 +63,7 @@ export const OrderDetailReducer = (state = { order: { items: [] } }, action) => 
         }
         case ORDER_DETAIL_FAILURE: {
             return {
+                ...state,
                 loading: false,
                 error: action.payload
             }
@@ -92,8 +93,8 @@ export const OrderCreateReducer = (state = {}, action) => {
                 error: action.payload
             }
         }
-        case ORDER_CREATE_RESET:{
-            return{}
+        case ORDER_CREATE_RESET: {
+            return {}
         }
         default: {
             return state

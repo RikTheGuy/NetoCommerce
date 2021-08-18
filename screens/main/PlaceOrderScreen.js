@@ -1,12 +1,19 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, ScrollView } from 'react-native'
 
 import { useSelector, useDispatch } from 'react-redux'
 
 import Button from '../../components/Button.js'
+import Colors from '../../constants/Colors.js'
+import Fonts from '../../constants/Fonts.js'
+import Sizes from '../../constants/Sizes.js'
+
+import CartItem from '../../components/CartItem.js'
+import { RadioButton } from '../../components/Form.js'
 
 import { createOrder } from '../../store/actions/OrderActions.js'
 import { ORDER_CREATE_RESET } from '../../store/constants/OrderConstants.js'
+import { scaleX, scaleY } from '../../utils/Scale.js'
 
 
 const PlaceOrderScreen = ({ navigation }) => {
@@ -41,10 +48,45 @@ const PlaceOrderScreen = ({ navigation }) => {
     }, [navigation, LoginReducer])
 
     return (
-        <View>
-            <Text>Place Order Screen</Text>
-            <Text>{JSON.stringify(OrderCreateReducer)}</Text>
-            <Button title='Proceed' onPress={submit} />
+        <View style={styles.screen}>
+            <ScrollView>
+                <View style={styles.group}>
+                    <Text style={{ fontSize: scaleY(Fonts.LARGE), color: Colors.NORMAL }}>Order Summary</Text>
+                </View>
+                <View style={styles.group}>
+                    <Text style={styles.title}>Shipping Address</Text>
+                    <View style={styles.body}>
+                        <Text style={styles.item}>Rik Roy</Text>
+                        <Text style={styles.item}>testuser3@email.com</Text>
+                        <Text style={styles.item}>{CartAddressReducer.address}</Text>
+                        <Text style={{ ...styles.item, fontSize: scaleY(Fonts.MEDIUM) }}>{CartAddressReducer.city} - {CartAddressReducer.postalCode}</Text>
+                    </View>
+                </View>
+                <View style={styles.group}>
+                    <Text style={styles.title}>Payment Method</Text>
+                    <View style={styles.body}>
+                        <RadioButton selected title='Cash On Delivery' />
+                    </View>
+                </View>
+                <View style={styles.group}>
+                    <Text style={styles.title}>Order Items</Text>
+                    <View style={styles.items}>
+                        <View>
+                            {
+                                CartReducer.items.map(item => (
+                                    <CartItem key={item._id} item={item} review={true} />
+                                ))
+                            }
+                        </View>
+                    </View>
+                </View>
+                <View style={{ ...styles.group, flexDirection: 'row-reverse' }}>
+                    <View style={styles.body}>
+                        <Text style={styles.title}>Total Price: 300</Text>
+                    </View>
+                </View>
+                <Button title='Place Order' onPress={submit} centered />
+            </ScrollView>
         </View>
     )
 
@@ -54,6 +96,27 @@ export default PlaceOrderScreen
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1
+        flex: 1,
+        backgroundColor: Colors.SECONDARY,
+        paddingHorizontal: scaleX(Sizes.MEDIUM),
+        paddingVertical: scaleY(Sizes.MEDIUM)
+    },
+    title: {
+        color: Colors.NORMAL,
+        fontSize: scaleY(Fonts.MEDIUM),
+        marginBottom: scaleY(Sizes.SMALL)
+    },
+    group: {
+        marginVertical: scaleY(Sizes.SMALL)
+    },
+    body: {
+        marginHorizontal: scaleX(Sizes.MEDIUM)
+    },
+    item: {
+        color: Colors.PRIMARY,
+        fontSize: scaleY(Fonts.SMALL)
+    },
+    items: {
+        minHeight: scaleY(300)
     }
 })

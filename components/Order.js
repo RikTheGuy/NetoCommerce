@@ -19,7 +19,7 @@ const CartItem = ({ item, onPress }) => {
                         </View>
                         <View style={styles.body}>
                             <View style={styles.dates}>
-                                <Text style={{ ...styles.delivered }}>{Date().toString().slice(0, 15)}</Text>
+                                <Text style={{ ...styles.delivered }}>{item.createdAt.slice(0, 10)}</Text>
                                 <Text style={{ ...styles.delivered, textAlign: 'right', color: item.isDelivered ? Colors.PRIMARY : Colors.DANGER }}>{item.isDelivered ? 'Delivered' : 'Arriving'}</Text>
                             </View>
                             <Text style={styles.address}>{item.shippingAddress.address}</Text>
