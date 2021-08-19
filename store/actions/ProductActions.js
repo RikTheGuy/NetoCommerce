@@ -4,11 +4,14 @@ import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAILURE,
-    
+
     PRODUCT_DETAIL_REQUEST,
     PRODUCT_DETAIL_SUCCESS,
     PRODUCT_DETAIL_FAILURE,
     PRODUCT_PAGE_LENGTH,
+
+    PRODUCT_APPLY_FILTER,
+    PRODUCT_CLEAR_FILTER
 } from '../constants/ProductConstants.js'
 
 export const listProducts = (page = 0) => async (dispatch) => {
@@ -62,6 +65,20 @@ export const getProduct = (id) => async (dispatch) => {
             payload: error.response && error.response.data.message ?
                 error.response.data.message :
                 error.message
+        })
+    }
+}
+
+export const applyFilter = (filters) => async (dispatch) => {
+
+    if (filters) {
+        dispatch({
+            type: PRODUCT_APPLY_FILTER,
+            payload: filters
+        })
+    } else {
+        dispatch({
+            type: PRODUCT_CLEAR_FILTER
         })
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, Text } from 'react-native'
+import { StyleSheet, View, TextInput, Text, Switch, } from 'react-native'
 
 import Colors from '../constants/Colors.js'
 import Fonts from '../constants/Fonts.js'
@@ -7,7 +7,7 @@ import Sizes from '../constants/Sizes.js'
 
 import { scaleX, scaleY } from '../utils/Scale.js'
 
-export const InputField = ({ placeholder = '', value = '', onChangeText, editable = true, style = {}, keyboardType = 'default', secureTextEntry = false }) => {
+export const InputField = ({ placeholder = '', value = '', onChangeText, editable = true, style = {}, keyboardType = 'default', secureTextEntry = false, onBlur }) => {
     return (
         <TextInput
             style={{
@@ -16,6 +16,7 @@ export const InputField = ({ placeholder = '', value = '', onChangeText, editabl
                 backgroundColor: editable ? Colors.SECONDARY : Colors.BACKGROUND,
                 ...style
             }}
+            onEndEditing={onBlur}
             keyboardType={keyboardType}
             placeholderTextColor={Colors.HINT}
             placeholder={placeholder}
@@ -44,10 +45,38 @@ export const RadioButton = ({ selected, title }) => {
     )
 }
 
-
-export const Label = ({ children }) => {
+export const Toggle = ({ value, onValueChange }) => {
     return (
-        <Text style={styles.label}>{children}</Text>
+        <Switch
+            trackColor={Colors.HINT}
+            thumbColor={Colors.PRIMARY}
+            value={value}
+            onValueChange={onValueChange}
+        />
+    )
+}
+
+export const Range = ({ min, setMin, max, setMax }) => {
+
+    const validate = () => {
+        const _min = parseInt(min)
+        if (_min > parseInt(max)) {
+            setMax(_min + 1)
+        }
+    }
+
+    return (
+        <View style={{ flexDirection: 'row', flex: 2 }}>
+            <InputField placeholder='Min' style={{ flex: 1 }} keyboardType='numeric' value={min.toString()} onChangeText={e => setMin(e)} onBlur={validate} />
+            <Text style={{ flex: 1, textAlignVertical: 'center', textAlign: 'center' }}>to</Text>
+            <InputField placeholder='Max' style={{ flex: 1 }} keyboardType='numeric' value={max.toString()} onChangeText={e => setMax(e)} onBlur={validate} />
+        </View>
+    )
+}
+
+export const Label = ({ style, children }) => {
+    return (
+        <Text style={{ ...styles.label, ...style }}>{children}</Text>
     )
 }
 
@@ -60,6 +89,12 @@ export const Title = ({ children }) => {
 export const Group = ({ children }) => {
     return (
         <View style={styles.group}>{children}</View>
+    )
+}
+
+export const GroupH = ({ children }) => {
+    return (
+        <View style={styles.groupH}>{children}</View>
     )
 }
 
@@ -101,4 +136,9 @@ const styles = StyleSheet.create({
     group: {
         marginBottom: scaleY(Sizes.MEDIUM),
     },
+    groupH: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: scaleY(Sizes.MEDIUM),
+    }
 })
