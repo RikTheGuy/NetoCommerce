@@ -99,6 +99,8 @@ export const getProfile = () => async (dispatch, getState) => {
             payload: { _id: data._id, tokens: data.tokens }
         })
     } catch (error) {
+        if (error.response && error.response.status === 401)
+            dispatch(logout())
         dispatch({
             type: USER_PROFILE_FAILURE,
             payload: error.response && error.response.data.message
