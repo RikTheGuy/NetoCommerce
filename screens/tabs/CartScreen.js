@@ -38,7 +38,7 @@ const CartScreen = ({ navigation }) => {
                             <View style={styles.checkout}>
                                 <View>
                                     <Text style={styles.checkoutText}>{CartReducer.items.length} Items</Text>
-                                    <Text style={styles.checkoutText}>200 (plus Taxes)</Text>
+                                    <Text style={styles.checkoutText}>{CartReducer.items.reduce((acc, value) => acc + value.price * value.quantity, 0)} (plus Taxes)</Text>
                                 </View>
                                 <Text style={styles.checkoutText}>Checkout <Ionicons name='arrow-forward' size={scaleY(Fonts.MEDIUM)} /></Text>
                             </View>
@@ -46,7 +46,7 @@ const CartScreen = ({ navigation }) => {
                     </View>
                 </View>
                 :
-                <Message message='Nothing To Show' style={{ textAlign: 'center', color: Colors.HINT }} />
+                <Message message='Cart Is Empty' style={{ textAlign: 'center', color: Colors.HINT }} />
             }
         </View>
     )

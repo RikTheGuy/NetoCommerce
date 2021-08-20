@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, TouchableNativeFeedback } from 'react-na
 import Colors from '../constants/Colors'
 import Fonts from '../constants/Fonts'
 import Sizes from '../constants/Sizes'
+import { BASE_URI } from '../constants/URL'
 import { scaleX, scaleY } from '../utils/Scale'
 
 import image from '../images/product_image.jpg'
@@ -29,7 +30,7 @@ const CartItem = ({ item, onPress }) => {
                             <View style={styles.items}>
                                 {
                                     item.items.slice(0, 5).map(x => (
-                                        <Image key={x._id} source={image} style={styles.image} />
+                                        <Image key={x._id} source={{ uri: BASE_URI + 'images/' + x.image }} defaultSource={image} style={styles.image} />
                                     ))
                                 }
                             </View>
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: scaleX(30),
-        aspectRatio: 1,
+        height: scaleX(30),
         resizeMode: 'contain',
         marginRight: scaleX(Sizes.SMALL)
     },

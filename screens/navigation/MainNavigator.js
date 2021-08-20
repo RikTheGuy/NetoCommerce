@@ -8,6 +8,7 @@ import OrderDetailScreen from '../main/OrderDetail.js'
 import OrderScreen from '../main/OrderScreen.js'
 import BottomNavigator from './BottomNavigator.js'
 import CheckoutNavigator from './CheckoutNavigator.js'
+import Terms from '../main/Terms.js';
 
 import Colors from '../../constants/Colors.js'
 
@@ -25,6 +26,7 @@ const MainNavigator = () => {
                 <Navigator.Screen name='Tabs' component={BottomNavigator} />
                 <Navigator.Screen name='Orders' options={{ headerTitle: 'My Orders' }} component={OrderScreen} />
                 <Navigator.Screen name='Detail' component={DetailScreen} />
+                <Navigator.Screen name='Terms' component={Terms} />
                 <Navigator.Screen name='OrderDetail' component={OrderDetailScreen} />
                 <Navigator.Screen name='Checkout' component={CheckoutNavigator} />
             </Navigator.Navigator>

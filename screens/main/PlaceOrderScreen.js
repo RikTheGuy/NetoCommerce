@@ -90,7 +90,7 @@ const PlaceOrderScreen = ({ navigation }) => {
                         </View>
                         <View style={{ ...styles.group, flexDirection: 'row-reverse' }}>
                             <View style={styles.body}>
-                                <Text style={styles.title}>Total Price: 300</Text>
+                                <Text style={styles.title}>Total Price: {CartReducer.items.reduce((acc, value) => acc + value.price * value.quantity, 0)}</Text>
                             </View>
                         </View>
                         <Button title='Place Order' onPress={submit} centered />
