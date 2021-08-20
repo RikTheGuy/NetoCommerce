@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BASE_URI } from '../../constants/URL.js'
+import { BASE_URI, API_URI } from '../../constants/URL.js'
 import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
@@ -22,7 +22,7 @@ export const listProducts = (page = 0) => async (dispatch) => {
         dispatch({ type: PRODUCT_LIST_REQUEST })
         const { data } = await axios({
             method: 'GET',
-            url: BASE_URI + `products/?limit=${limit}&skip=${page}`,
+            url: BASE_URI + API_URI + `products/?limit=${limit}&skip=${page}`,
             headers: {
                 'Content': 'application/json'
             }
@@ -48,7 +48,7 @@ export const getProduct = (id) => async (dispatch) => {
         dispatch({ type: PRODUCT_DETAIL_REQUEST })
         const { data } = await axios({
             method: 'GET',
-            url: BASE_URI + `products/${id}`,
+            url: BASE_URI + API_URI + `products/${id}`,
             headers: {
                 'Content': 'application/json'
             }

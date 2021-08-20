@@ -5,6 +5,7 @@ import { StyleSheet, View, Text, Image, TouchableNativeFeedback } from 'react-na
 import Colors from '../constants/Colors.js'
 import Fonts from '../constants/Fonts.js'
 import Sizes from '../constants/Sizes.js'
+import { BASE_URI } from '../constants/URL.js'
 
 import RatingInput from './RatingInput.js'
 import { Ionicons } from '@expo/vector-icons'
@@ -23,7 +24,7 @@ const Product = ({ product, onPress }) => {
                 </View>
                 <TouchableNativeFeedback onPress={onPress}>
                     <View style={styles.container}>
-                        <Image source={image} style={styles.image} />
+                        <Image source={{ uri: BASE_URI + 'images/' + product.image }} defaultSource={image} style={styles.image} />
                         <View style={styles.details}>
                             <Text style={styles.title}>{product.title}</Text>
                             <RatingInput value={product.rating} editable={false} size={scaleY(Fonts.MEDIUM)} />

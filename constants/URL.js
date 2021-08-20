@@ -1,1 +1,2 @@
-export const BASE_URI = 'https://netocommerce.herokuapp.com/api/'
+export const BASE_URI = 'https://netocommerce.herokuapp.com/'
+export const API_URI = 'api/'

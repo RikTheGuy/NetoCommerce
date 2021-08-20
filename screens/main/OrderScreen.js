@@ -5,11 +5,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { listOrders } from '../../store/actions/OrderActions.js'
 
 import Message from '../../components/Message.js'
-import FAB from '../../components/FloatingActionButton.js'
 import Order from '../../components/Order.js'
 
 import Colors from '../../constants/Colors.js'
-import Fonts from '../../constants/Fonts.js'
 import { ORDER_LIST_RESET, ORDER_PAGE_LENGTH } from '../../store/constants/OrderConstants.js'
 
 const OrderScreen = ({ navigation }) => {
@@ -72,7 +70,6 @@ const OrderScreen = ({ navigation }) => {
                 orderListReducer.error != null &&
                 <Message message={orderListReducer.error} style={{ textAlign: 'center' }} danger />
             }
-            <FAB fontSize={Fonts.LARGE} iconName='md-filter' onPress={() => console.log('Filter')} />
         </View>
     )
 }

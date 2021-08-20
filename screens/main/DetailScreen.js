@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, ScrollView, Text, ActivityIndicator, Image } from 'react-native'
+import { Picker } from '@react-native-picker/picker'
 import { Ionicons } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux';
 
 import Message from '../../components/Message.js';
 import Button from '../../components/Button.js';
-import { InputField } from '../../components/Form.js';
 
 import { getProduct } from '../../store/actions/ProductActions.js'
 import { addItem } from '../../store/actions/CartActions.js'
@@ -15,6 +15,7 @@ import image from '../../images/product_image.jpg'
 import Colors from '../../constants/Colors.js';
 import Fonts from '../../constants/Fonts.js';
 import Sizes from '../../constants/Sizes.js';
+import { BASE_URI } from '../../constants/URL.js'
 
 const DetailScreen = ({ navigation, route }) => {
     const dispatch = useDispatch()
@@ -53,7 +54,7 @@ const DetailScreen = ({ navigation, route }) => {
                                 <Text style={{ ...styles.vegText, color: productDetailReducer.product.veg ? Colors.PRIMARY : Colors.DANGER }}>{productDetailReducer.product.veg ? 'Veg' : 'Non Veg'}</Text>
                             </View>
                             <View style={styles.imageContainer}>
-                                <Image source={image} style={styles.image} />
+                                <Image defaultSource={image} source={{ uri: BASE_URI + 'images/' + productDetailReducer.product.image }} style={styles.image} />
                             </View>
                             <View style={styles.container}>
                                 <View style={styles.field}>
@@ -102,7 +103,19 @@ const DetailScreen = ({ navigation, route }) => {
                         </View>}
             </ScrollView>
             <View style={styles.footer}>
-                <InputField style={{ flex: 1, borderRightWidth: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0 }} placeholder='Quantity' keyboardType='decimal-pad' value={quantity.toString()} onChangeText={e => setQuantity(e)} />
+                <Picker style={styles.qty} selectedValue={quantity}
+                    onValueChange={(itemValue, itemIndex) => setQuantity(itemValue)}>
+                    <Picker.Item label='1' value={1} />
+                    <Picker.Item label='2' value={2} />
+                    <Picker.Item label='3' value={3} />
+                    <Picker.Item label='4' value={4} />
+                    <Picker.Item label='5' value={5} />
+                    <Picker.Item label='6' value={6} />
+                    <Picker.Item label='7' value={7} />
+                    <Picker.Item label='8' value={8} />
+                    <Picker.Item label='9' value={9} />
+                    <Picker.Item label='10' value={10} />
+                </Picker>
                 <Button style={{ flex: 1, borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }} title='Add To Cart' onPress={submit} centered />
             </View>
         </View>
@@ -123,7 +136,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     image: {
-        width: '80%',
+        width: scaleX(340),
+        height: scaleY(400),
         resizeMode: 'contain'
     },
     container: {
@@ -159,6 +173,15 @@ const styles = StyleSheet.create({
         fontSize: scaleY(Fonts.SMALL),
         textAlign: 'center',
         textTransform: 'uppercase'
+    },
+    qty: {
+        flex: 1,
+        borderRightWidth: 0,
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
+        textAlignVertical: 'center',
+        color: Colors.NORMAL,
+        fontSize: scaleY(Fonts.SMALL)
     },
     table: {
         backgroundColor: Colors.PRIMARY,

@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Image, TouchableNativeFeedback } from 'react-na
 import Colors from '../constants/Colors'
 import Fonts from '../constants/Fonts'
 import Sizes from '../constants/Sizes'
+import { BASE_URI } from '../constants/URL.js'
 import { scaleX, scaleY } from '../utils/Scale'
 import { Picker } from '@react-native-picker/picker'
 
@@ -24,7 +25,7 @@ const CartItem = ({ item, review = false }) => {
 
     return (
         <View style={styles.screen}>
-            <Image source={image} style={styles.img} />
+            <Image source={{ uri: BASE_URI + 'images/' + item.image }} defaultSource={image} style={styles.img} />
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.price}>{item.price} X</Text>
             {

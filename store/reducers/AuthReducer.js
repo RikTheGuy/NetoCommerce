@@ -10,6 +10,9 @@ import {
     AUTH_REGISTER_RESET,
 
     AUTH_LOGOUT_SUCCESS,
+    USER_PROFILE_REQUEST,
+    USER_PROFILE_SUCCESS,
+    USER_PROFILE_FAILURE,
 
 } from '../constants/AuthConstants.js'
 
@@ -67,6 +70,31 @@ export const RegisterReducer = (state = {}, action) => {
         }
         case AUTH_REGISTER_RESET: {
             return {}
+        }
+        default: {
+            return state
+        }
+    }
+}
+
+export const ProfileReducer = (state = { data: {} }, action) => {
+    switch (action.type) {
+        case USER_PROFILE_REQUEST: {
+            return {
+                loading: true,
+            }
+        }
+        case USER_PROFILE_SUCCESS: {
+            return {
+                loading: false,
+                data: action.payload
+            }
+        }
+        case USER_PROFILE_FAILURE: {
+            return {
+                loading: false,
+                error: action.payload
+            }
         }
         default: {
             return state

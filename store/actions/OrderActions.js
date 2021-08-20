@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BASE_URI } from '../../constants/URL.js'
+import { BASE_URI, API_URI } from '../../constants/URL.js'
 import {
     ORDER_LIST_REQUEST,
     ORDER_LIST_SUCCESS,
@@ -27,7 +27,7 @@ export const listOrders = (page = 0) => async (dispatch, getState) => {
         dispatch({ type: ORDER_LIST_REQUEST })
         const { data } = await axios({
             method: 'GET',
-            url: BASE_URI + `orders/?limit=${limit}&skip=${page}`,
+            url: BASE_URI + API_URI + `orders/?limit=${limit}&skip=${page}`,
             headers: {
                 'Content': 'application/json',
                 'Authorization': `Bearer ${authLogin.data.tokens.token}`
@@ -61,7 +61,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
         dispatch({ type: ORDER_DETAIL_REQUEST })
         const { data } = await axios({
             method: 'GET',
-            url: BASE_URI + `orders/${id}`,
+            url: BASE_URI + API_URI + `orders/${id}`,
             headers: {
                 'Content': 'application/json',
                 'Authorization': `Bearer ${authLogin.data.tokens.token}`
@@ -97,7 +97,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         dispatch({ type: ORDER_CREATE_REQUEST })
         const { data } = await axios({
             method: 'POST',
-            url: BASE_URI + `orders/`,
+            url: BASE_URI + API_URI + `orders/`,
             headers: {
                 'Content': 'application/json',
                 'Authorization': `Bearer ${authLogin.data.tokens.token}`

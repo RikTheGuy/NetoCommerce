@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ProductListReducer, ProductDetailReducer } from './store/reducers/ProductReducer.js'
 import { OrderListReducer, OrderDetailReducer, OrderCreateReducer } from './store/reducers/OrderReducer.js'
 import { CartReducer, CartAddressReducer } from './store/reducers/CartReducer.js'
-import { LoginReducer, RegisterReducer } from './store/reducers/AuthReducer.js'
+import { LoginReducer, ProfileReducer, RegisterReducer } from './store/reducers/AuthReducer.js'
 
 import MainNavigator from './screens/navigation/MainNavigator.js'
 
@@ -23,7 +23,7 @@ const reducer = combineReducers({
   productList: ProductListReducer, productDetail: ProductDetailReducer,
   orderList: OrderListReducer, orderDetail: OrderDetailReducer, orderCreate: OrderCreateReducer,
   cart: CartReducer, cartAddress: CartAddressReducer,
-  authLogin: persistReducer(authConfig, LoginReducer), authRegister: RegisterReducer
+  authLogin: persistReducer(authConfig, LoginReducer), authRegister: RegisterReducer, authProfile: ProfileReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))
